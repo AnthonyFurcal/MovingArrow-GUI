@@ -27,7 +27,7 @@ event_queue = Queue()
 clients = set()
 video_Stream = False
 clients_lock = Lock()
-VIDEO_PATH = "VideoFootage/car.mov"
+VIDEO_PATH = 0
 # Logging configuration
 LOG_FILE_PATH = "app.log"
 LOGIN_LOG_FILE_PATH = "login.log"
