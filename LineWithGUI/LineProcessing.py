@@ -1,4 +1,5 @@
-# THIS IS ANTHONY FURCAL'S CODE FOR THE LANE LINE DETECTION ASSIGNMENT
+# BETA 1.0.0
+# ALL CODE IN THIS FILE WAS WRITTEN BY DESERTRON MEMBER ANTHONY FURCAL FOR THE INDEPENDENT LANE LINE DETECTION PROJECT
 
 
 import cv2
@@ -6,9 +7,9 @@ import numpy as np
 from numpy.ma.core import arctan
 
 
-
-
-
+# Image - the image file you would like to warp
+# Reverse - boolean value, keep to false to transform an image normally, set to true if you are reversing another transform
+# This function returns the warped image
 def warp_frame(image, reverse):
    roi_points = np.array([
        (322, 174),  # Top-left corner
@@ -47,25 +48,9 @@ def warp_frame(image, reverse):
 
    return result
 
-
-
-
-def direction(points):
-    directions = points[-1] - points[0]
-
-    # Check if the vector has zero length
-    if np.linalg.norm(directions) == 0:
-        raise ValueError("The first and last points are the same. Cannot compute a direction vector.")
-
-    # Normalize to unit vector
-    normalized_directions = directions / np.linalg.norm(directions)
-
-    return normalized_directions
-
-
-
-
-
+# binary_image - A prefiltered image that will be used to calculate the location of lines
+# image - original image that filtered image was made from, this is where the lines will be overlayed.
+# This function returns the original image with the overlayed lines.
 def hist_detection(binary_image, image):
    histogram = np.sum(binary_image[binary_image.shape[0] // 2:, :], axis=0)
 
@@ -188,8 +173,9 @@ def hist_detection(binary_image, image):
        return image, 0
 
 
-
-
+# image - The image you would like to compass to be overlayed on
+# angle - angle that you want the arrow should be point in (intended to be calculated with another function)
+# This function returns the original image with an arrow in the corner pointing in the direction of the specified angle
 def compass_overlay(image, angle):
 
    angle = -angle
@@ -244,7 +230,8 @@ def compass_overlay(image, angle):
 
 
 
-
+# frame - the frame you need to be processed
+# This function returns the original image after being pipelined through all the other functions in this file.
 def stream_processing(frame):
     resized_frame = cv2.resize(frame, (640, 360))
     warped = warp_frame(resized_frame, False)
