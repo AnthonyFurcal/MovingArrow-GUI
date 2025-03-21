@@ -1,3 +1,5 @@
+# BETA 1.0.0
+# ALL FUNCTIONS WITHIN THIS DOCUMENT WERE WRITTEN BY DESERTRON FOR THE GROUP ROBOT MOVEMENT PROJECT
 # Import necessary modules
 import platform
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, Response
