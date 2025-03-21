@@ -1,3 +1,5 @@
+# BETA 1.0.0
+# THIS FILE WAS WRITTEN BY DESERTRON FOR THE GROUP GUI PROJECT.
 # Import required modules
 import datetime
 import sqlite3
