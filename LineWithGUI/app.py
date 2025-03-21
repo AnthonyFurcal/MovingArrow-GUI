@@ -42,13 +42,15 @@ logging.basicConfig(
     ]
 )
 
+# event_type - variable containing event message that needs to be sent
+# data - actual information that needs to be sent
 def broadcast_event(event_type, data):
     """Send event to all connected clients."""
     event = {'type': event_type, 'data': data}
     with clients_lock:
         for client_queue in clients:
             client_queue.put(event)
-
+# username - username logging in
 def log_login(username):
     """Log login attempt and broadcast event."""
     login_message = f"{username} logged in at {datetime.now()}"
@@ -66,6 +68,7 @@ def check_services():
     except Exception:
         return False
 
+# action that the robot needs to take
 def control_robot(action):
     """Send control commands to the robot."""
     global message
